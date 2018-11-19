@@ -39,6 +39,7 @@ INSTALLED_APPS = [
 
     # third-party apps
     'localflavor',
+    'django_extensions',
 
     # my apps
     'pets',
