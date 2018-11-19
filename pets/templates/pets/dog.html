@@ -1,13 +1,22 @@
 {% extends "pets/base.html" %}
 
 {% block content %}
-  <h1>{{ dog.name }}</h1>
+<h1>{{ dog.name }}</h1>
 
-  <h2>Apply to adopt {{ dog.name }}</h2>
+{% if dog.event_set.count > 0 %}
+  <h2>Events {{ dog.name }} will be at</h2>
+  <ul>
+    {% for event in dog.event_set.all %}
+      <li>{{ event.name }} - {{ event.date }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
 
-  <form method="POST" action="{% url 'dog_application_detail' dog_id=dog.id %}">
+<h2>Apply to adopt {{ dog.name }}</h2>
+
+<form method="POST" action="{% url 'dog_application_detail' dog_id=dog.id %}">
   {% csrf_token %}
   {{ adoption_form.as_p }}
   <button type="submit">Submit application</button>
-  </form>
+</form>
 {% endblock %}

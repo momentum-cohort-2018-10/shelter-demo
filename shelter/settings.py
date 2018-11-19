@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     # my apps
     'pets',
+    'events',
 ]
 
 MIDDLEWARE = [
