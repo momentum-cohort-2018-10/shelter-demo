@@ -1,10 +1,11 @@
 {% extends "core/base.html" %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 <h2>{{ form_title }}</h2>
 <form action="{% url 'volunteer_application' %}" method="POST">
   {% csrf_token %}
-  {{ form.as_p }}
+  {{ form|crispy }}
   <button class="submit">{{ button_title }}</button>
 </form>
 {% endblock %}

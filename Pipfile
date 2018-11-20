@@ -9,6 +9,7 @@ pillow = "*"
 django-localflavor = "*"
 django-extensions = "*"
 werkzeug = "*"
+django-crispy-forms = "*"
 
 [dev-packages]
 yapf = "*"
