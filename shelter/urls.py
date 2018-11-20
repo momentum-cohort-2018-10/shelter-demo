@@ -31,6 +31,11 @@ urlpatterns = [
         pets_views.create_application,
         name="dog_application_detail"),
     path(
+        'volunteer/',
+        core_views.volunteer_application,
+        name="volunteer_application",
+    ),
+    path(
         'accounts/register/',
         core_views.register,
         name="register",
