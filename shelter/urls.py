@@ -18,17 +18,23 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 
-from pets import views
+from pets import views as pets_views
+from core import views as core_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index, name="dog_list"),
-    path('contact/', views.contact),
-    path('dogs/<int:dog_id>/', views.dog, name="dog_detail"),
+    path('', pets_views.index, name="dog_list"),
+    path('contact/', pets_views.contact),
+    path('dogs/<int:dog_id>/', pets_views.dog, name="dog_detail"),
     path(
         'dogs/<int:dog_id>/adopt/',
-        views.create_application,
+        pets_views.create_application,
         name="dog_application_detail"),
+    path(
+        'accounts/register/',
+        core_views.register,
+        name="register",
+    ),
 ]
 
 if settings.DEBUG:

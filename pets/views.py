@@ -8,20 +8,7 @@ from pets.forms import SearchForm, AdoptionForm
 def index(request):
     if request.GET:
         form = SearchForm(request.GET)
-        if form.is_valid():
-            data = form.cleaned_data
-            dogs = Dog.objects.all()
-            if data['age']:
-                dogs = dogs.filter(age=data['age'])
-            if data['size']:
-                dogs = dogs.filter(size__in=data['size'])
-            if data['good_with_kids']:
-                dogs = dogs.filter(good_with_kids=True)
-            if data['good_with_dogs']:
-                dogs = dogs.filter(good_with_dogs=True)
-            if data['good_with_cats']:
-                dogs = dogs.filter(good_with_cats=True)
-
+        dogs = form.search()
     else:
         form = SearchForm()
         dogs = Dog.objects.all()
