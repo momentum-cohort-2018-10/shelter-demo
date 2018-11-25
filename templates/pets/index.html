@@ -1,4 +1,4 @@
-{% extends "core/base.html" %}
+{% extends "base.html" %}
 {% load staticfiles %}
 
 {% block content %}
@@ -6,6 +6,7 @@
 <section class="search pa3 bg-light-gray">
   <h3 class="search__title mb0">Show me dogs that are...</h3>
   <form method="GET" action="{% url 'dog_list' %}">
+    {% csrf_token %}
     <div class="flex mb3">
       <div class="mr5">
         <h4><label for="{{ search_form.age.id_for_label }}">Age</label></h4>
@@ -44,33 +45,32 @@
   </form>
 </section>
 <section>
-  <div class="flex flex-wrap justify-between">
-    {% if dogs %}
+  <div class="flex flex-wrap justify-between">      
     {% for dog in dogs %}
-    <div class="w-30-l w-40-m w-100 mr3 mt3 mb3">
-      {% if dog.picture %}
-      <a href="{% url 'dog_detail' dog_id=dog.id %}">
-        <img src="{{ dog.picture.url }}" alt="{{ dog.name }}, {{ dog.description }}">
-      </a>
-      {% endif %}
-      <div class="fw6 tracked-tight f4">
+      <div class="w-30-l w-40-m w-100 mr3 mt3 mb3">
+        {% if dog.picture %}
         <a href="{% url 'dog_detail' dog_id=dog.id %}">
-          {{ dog.name }}
+          <img src="{{ dog.picture.url }}" alt="{{ dog.name }}, {{ dog.description }}">
         </a>
+        {% endif %}
+        <div class="fw6 tracked-tight f4">
+          <a href="{% url 'dog_detail' dog_id=dog.id %}">
+            {{ dog.name }}
+          </a>
+        </div>
+        <div>
+          {% for quality in dog.get_qualities %}
+          <span class="br-pill pv1 ph2 dib mv1 bg-lightest-blue">{{ quality }}</span>
+          {% endfor %}
+        </div>
+        <div><b>Good with cats:</b> {{ dog.good_with_cats|yesno:"aight,naw" }}</div>
       </div>
-      <div>
-        {% for quality in dog.get_qualities %}
-        <span class="br-pill pv1 ph2 dib mv1 bg-lightest-blue">{{ quality }}</span>
-        {% endfor %}
-      </div>
-    </div>
+    {% empty %}
+      <p>
+        No dogs matched your search.
+        Would you like to <a href="{% url "dog_list" %}">see all dogs</a>?
+      </p>
     {% endfor %}
-    {% else %}
-    <p>
-      No dogs matched your search.
-      Would you like to <a href="{% url "dog_list" %}">see all dogs</a>?
-    </p>
-    {% endif %}
   </div>
 </section>
 {% endblock %}

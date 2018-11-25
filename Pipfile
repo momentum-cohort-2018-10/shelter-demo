@@ -10,10 +10,12 @@ django-localflavor = "*"
 django-extensions = "*"
 werkzeug = "*"
 django-crispy-forms = "*"
+django-debug-toolbar = "*"
 
 [dev-packages]
 yapf = "*"
 prospector = "*"
+ipython = "*"
 
 [requires]
 python_version = "3.7"

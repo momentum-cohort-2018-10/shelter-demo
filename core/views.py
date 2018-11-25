@@ -19,7 +19,7 @@ def register(request):
     else:
         form = UserCreationForm()
 
-    return render(request, "core/register.html", {"form": form})
+    return render(request, "registration/register.html", {"form": form})
 
 
 @login_required
