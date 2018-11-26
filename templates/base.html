@@ -22,7 +22,7 @@
             <li class="ph2 dib">Logged in as {{ request.user }}</li>          
             <li class="ph2 dib"><a class="no-underline white" href="{% url "logout" %}">Logout</a></li>
           {% else %}
-            <li class="ph2 dib"><a class="no-underline white" href="{% url "login" %}">Login</a></li>
+            <li class="ph2 dib"><a class="no-underline white" href="{% url "login" %}">Sign in</a></li>
             <li class="ph2 dib"><a class="no-underline white" href="{% url "register" %}">Register</a></li>
           {% endif %}
         </ul>
