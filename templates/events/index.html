@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Upcoming events</h2>
+
+  {% for event in events %}
+    <div>
+      <h3>{{ event.name }}</h3>
+      {% if event.dogs.count %}
+        <div>Dogs attending</div>
+        <ul>
+          {% for dog in event.dogs %}
+            <li>{{ dog.name }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+  {% endfor %}
+{% endblock %}
