@@ -11,6 +11,8 @@ django-extensions = "*"
 werkzeug = "*"
 django-crispy-forms = "*"
 django-debug-toolbar = "*"
+django-phonenumber-field = "*"
+phonenumbers = "*"
 
 [dev-packages]
 yapf = "*"
