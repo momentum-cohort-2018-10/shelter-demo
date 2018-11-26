@@ -20,6 +20,7 @@ from django.conf.urls.static import static
 
 from pets import views as pets_views
 from core import views as core_views
+from events import views as events_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -34,6 +35,11 @@ urlpatterns = [
         'volunteer/',
         core_views.volunteer_application,
         name="volunteer_application",
+    ),
+    path(
+        'events/',
+        events_views.all_events,
+        name="event_list",
     ),
     path(
         'accounts/register/',
