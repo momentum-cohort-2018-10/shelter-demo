@@ -13,6 +13,7 @@ django-crispy-forms = "*"
 django-debug-toolbar = "*"
 django-phonenumber-field = "*"
 phonenumbers = "*"
+django-simple-pagination = "*"
 
 [dev-packages]
 yapf = "*"
