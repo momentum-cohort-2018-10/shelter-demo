@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from pets.models import Dog
 from pets.forms import SearchForm, AdoptionForm
+from django.contrib import messages
 
 # Create your views here.
 
@@ -37,10 +38,16 @@ def create_application(request, dog_id):
     adoption_form = AdoptionForm(request.POST)
     if adoption_form.is_valid():
         application = adoption_form.save()
-        return render(request, 'pets/application_received.html', {
-            "shelter_name": "Lazy River Shelter",
-            "application": application
-        })
+        success_msg = f"Your application to adopt {application.dog.name} has been received! We will contact you at {application.email} within 2-3 days."
+        messages.add_message(request, messages.SUCCESS, success_msg)
+
+        if application.current_pet_owner and application.dog.needs_no_pets():
+            messages.add_message(
+                request, messages.ERROR,
+                'This dog requires a home with no pets. Your application may be denied.'
+            )
+
+        return redirect(to='dog_list')
 
     dog = Dog.objects.get(pk=dog_id)
     return render(

@@ -41,6 +41,9 @@ class Dog(models.Model):
             qualities.append("Good with cats")
         return qualities
 
+    def needs_no_pets(self):
+        return not (self.good_with_dogs or self.good_with_cats)
+
     def __str__(self):
         return self.name
 
